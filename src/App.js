@@ -9,84 +9,82 @@ import Button from '@mui/material/Button';
 
 function App() {
 
-  const [group, setGroup] =useState('All');
-  const [check, setCheck] = useState("");
-  const setArr = null;
-   
   const tasks = [
-    {finished: true,
-      tname: "finish HTML"},
+    {
+      finished: true,
+      tname: "finish HTML"
+    },
 
-    { finished: false,
-      tname: "finish React"},
+    {
+      finished: false,
+      tname: "finish React"
+    },
 
-    { finished: true,
-      tname: "Learn NodeJS"},
+    {
+      finished: true,
+      tname: "Learn NodeJS"
+    },
+
+    {
+      finished: false,
+      tname: "Learn ExpressJS"
+    },
+
+    {
+      finished: true,
+      tname: "Learn MongoDB"
+    },
   ]
-  
-  
- 
+
+  const [check, setCheck] = useState("");
+  const [initialTasks, setInitialTasks] = useState(tasks)
+
+  const setArr = (status) => {
+    if (status === "All") {
+      setInitialTasks(tasks);
+    } else if(status === 'Completed'){
+      setInitialTasks(tasks.filter((t) => t.finished === true))
+    } else if (status === "Active") {
+      setInitialTasks(tasks.filter((t) => t.finished === false))
+    }
+  }
+
   return (
     <div className="App">
-      <div >
+              <div>
+          <p className='title'>To Do Tasks</p>
+        </div>
         <div>
-      <p className='title'>To Do Tasks</p>
+
+          <TextField fullWidth label="New Task..." id="fullWidth" />
+        </div>
+        <div className='group-title'>
+          <Button variant="text" onClick={() => setArr("All")
+
+          }>All</Button>
+          <Button variant="text" onClick={() => setArr("Active")
+
+          } >Active</Button>
+          <Button variant="text" onClick={() => setArr("Completed")
+
+
+          }>Completed</Button>
+
+        </div>
+        <div className='tasks-list'> {
+          initialTasks.map((arr) =>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox
+                  defaultValue={arr.finished}
+                  onClick={() => setCheck(!check)}
+                />
+                } label={arr.tname} />
+            </FormGroup>)
+        }
+        </div>
       </div>
-      <div>
-        
-               <TextField fullWidth label="New Task..." id="fullWidth"  />
-      </div>
-      <div className='group-title'>
-      <Button variant="text" onClick={() => setGroup("All")
-
-    }>All</Button>
-      <Button variant="text" onClick= { () => setGroup("Active")
-      
-               } >Active</Button>
-      <Button variant="text" onClick={() => setGroup("Completed")
-
-    
-      }>Completed</Button>
-
-      </div>
-
-      { function setArr (){
-      if (setGroup ==="All") {
-     return  (
-       <div className='tasks-list'> {
-
-       tasks.filter((t)=>t.finished===true).map((arr)=> 
-           
-         <FormGroup>
-         <FormControlLabel 
-         control={<Checkbox 
-         defaultValue={arr.finished} 
-         onClick = {  () => setCheck(!check)}
-         onchange = {() => {arr.finished=setCheck}}
-         />
-         
-         } label={arr.tname} />
-        
-       </FormGroup>   ) 
-   }
-      
-    </div>  
-     )
-     
-   }
-   if (setGroup ==="Completed") {
-     
-   }
-   if (setGroup ==="Active" ){
-     
-   }
- 
-    }
-
-  }
-      </div>
-    </div>
-  );
+      );
 }
 
 export default App;
