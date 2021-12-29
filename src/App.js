@@ -76,10 +76,11 @@ function App() {
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox
-                  defaultValue={arr.finished}
+                  defaultValue={arr.finished} 
                   onClick={() => setCheck(!check)}
                 />
-                } label={arr.tname} />
+                } label={arr.tname}
+                style={{textDecoration :arr.finished===true?'line-through' :null}} />
             </FormGroup>)
         }
         </div>
