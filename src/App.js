@@ -65,27 +65,33 @@ function App() {
           <Button variant="text" onClick={() => setArr("Active")
 
           } >Active</Button>
-          <Button variant="text" onClick={() => setArr("Completed")
-
-
-          }>Completed</Button>
+          <Button variant="text" onClick={() => setArr("Completed")}>Completed</Button>
 
         </div>
-        <div className='tasks-list'> {
-          initialTasks.map((arr) =>
+        <div className='tasks-list'>
+          {
+           
+          initialTasks.map((arr) => {
+            return(
             <FormGroup>
-              <FormControlLabel
-                control={<Checkbox
-                  defaultValue={arr.finished} 
-                  onClick={() => setCheck(!check)}
-                />
-                } label={arr.tname}
-                style={{textDecoration :arr.finished===true?'line-through' :null}} />
-            </FormGroup>)
-        }
+                <FormControlLabel
+            control={
+              <Checkbox defaultValue={arr.finished} onClick={() => setCheck(!check)} name="task" />
+            }
+            label= {arr.tname} 
+            style={{textDecoration :arr.finished===true?'line-through' :null}}     
+                 />
+          
+            </FormGroup>
+            ) 
+          })
+      
+        } 
         </div>
       </div>
+
       );
+     
 }
 
 export default App;
